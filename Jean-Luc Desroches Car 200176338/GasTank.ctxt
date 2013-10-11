@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=
+comment0.target=GasTank()
+comment0.text=\r\n\ Creates\ the\ gas\ tank\ object\ and\ sets\ default\ gas\ tank\ value\r\n
+comment1.params=
+comment1.target=boolean\ haveGas()
+comment1.text=\r\n\ Checks\ the\ gas\ tank\ to\ see\ whether\ there\ is\ any\ gas\ left\r\n
+comment2.params=
+comment2.target=java.lang.String\ level()
+comment2.text=\r\n\ Returns\ the\ amount\ of\ gas\ reamining\ in\ the\ tank\r\n
+numComments=3

@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Door()
+comment0.text=\r\n\ Creates\ the\ main\ door\ object\ and\ sets\ door\ open\ status\ to\ false\r\n
+comment1.params=open
+comment1.target=java.lang.String\ changeDoorState(boolean)
+comment1.text=\r\n\ Inverse\ the\ door\ state\ if\ it\ is\ not\ in\ the\ queried\ type\r\n
+comment2.params=
+comment2.target=boolean\ checkDoor()
+comment2.text=\r\n\ Returns\ the\ state\ of\ the\ door\r\n
+numComments=3

@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=maxValue
+comment0.target=numDisplay(int)
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ numDisplay\r\n
+comment1.params=
+comment1.target=int\ getNumber()
+comment1.text=\r\n\ Returns\ the\ current\ value\ of\ number\r\n
+comment2.params=newNumber
+comment2.target=void\ changeNumber(int)
+comment2.text=\r\n\ Changes\ the\ value\ of\ number\ to\ a\ new\ specified\ value\r\n
+comment3.params=
+comment3.target=java.lang.String\ displayValue()
+comment3.text=\r\n\ Returns\ the\ current\ value\ as\ a\ string\ to\ be\ displayed\r\n
+comment4.params=
+comment4.target=void\ increment()
+numComments=5

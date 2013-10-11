@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Body()
+comment0.text=\r\n\ Main\ constructor,\ creates\ two\ door\ objects\r\n
+comment1.params=door
+comment1.target=java.lang.String\ openDoor(int)
+comment1.text=\r\n\ Attempt\ to\ open\ the\ specified\ door\ and\ returns\ a\ response\ stating\ whther\ the\ door\ is\ open\ or\ closed\r\n
+comment2.params=door
+comment2.target=java.lang.String\ closeDoor(int)
+comment2.text=\r\n\ Attempt\ to\ close\ the\ specified\ door\r\n
+comment3.params=
+comment3.target=java.lang.String\ checkDoors()
+comment3.text=\r\n\ checks\ both\ doors\ and\ ensure\ that\ they\ are\ not\ open,\ return\ the\ state\ of\ the\ doors\r\n
+comment4.params=x
+comment4.target=boolean\ checkDoors(int)
+comment4.text=\r\n\ Special\ checkdoor\ method\ which\ returns\ a\ true\ or\ false\ statement\ for\ engine\ checks\r\n
+numComments=5

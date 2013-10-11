@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.params=
+comment0.target=DriverControls()
+comment0.text=\r\n\ creates\ required\ object\ engine,\ and\ sets\ engine\ state\ as\ 1,\ which\ is\ the\ setting\ for\ 'off'\r\n
+comment1.params=
+comment1.target=java.lang.String\ turnIgnition()
+comment1.text=\r\n\ Flips\ the\ engine\ state\ through\ the\ engine\ object\ then\ returns\ the\ current\ engine\ state\r\n
+comment2.params=doors\ gear
+comment2.target=java.lang.String\ shiftGear(boolean,\ int)
+comment2.text=\r\n\ Sends\ the\ requested\ gear\ number\ down\ to\ the\ engine\ and\ returns\ the\ result\r\n
+comment3.params=
+comment3.target=java.lang.String\ checkDashboard()
+comment3.text=\r\n\ Checks\ various\ aspects\ of\ the\ cars\ state,\ and\ returns\ the\ results\ in\ a\ concatenated\ string\r\n
+comment4.params=doors
+comment4.target=java.lang.String\ applyGas(boolean)
+comment4.text=\r\n\ Sends\ request\ to\ apply\ gas\ within\ the\ engine,\ and\ returns\ the\ result\r\n
+comment5.params=
+comment5.target=java.lang.String\ applyBrake()
+comment5.text=\r\n\ Sends\ request\ to\ apply\ the\ brake\ within\ the\ engine,\ and\ returns\ the\ result\r\n
+numComments=6

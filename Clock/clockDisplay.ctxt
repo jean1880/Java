@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=
+comment0.target=clockDisplay()
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ clockDisplay\r\n
+comment1.params=
+comment1.target=void\ tick()
+comment2.params=
+comment2.target=void\ updateDisplay()
+comment3.params=
+comment3.target=java.lang.String\ currentTime()
+numComments=4

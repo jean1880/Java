@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=
+comment0.target=OilReserve()
+comment0.text=\r\n\ Creates\ the\ oil\ reserve\ object\r\n
+comment1.params=
+comment1.target=java.lang.String\ useOil()
+comment1.text=\r\n\ Decreses\ the\ amount\ of\ oil\ left\ in\ the\ reserve\ and\ returns\ the\ amount\r\n
+comment2.params=
+comment2.target=java.lang.String\ checkOil()
+comment2.text=\r\n\ Returns\ the\ amount\ of\ oil\ left\ in\ the\ reserve\r\n
+numComments=3

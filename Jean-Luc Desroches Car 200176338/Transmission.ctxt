@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Transmission()
+comment0.text=\r\n\ Creates\ the\ transmission\ and\ sets\ the\ current\ gear\ to\ park\r\n
+comment1.params=gear
+comment1.target=java.lang.String\ shiftGear(int)
+comment1.text=\r\n\ Takes\ an\ inputed\ gear\ number\ to\ shift\ gears,\ returns\ an\ error\ if\ the\ transmission\r\n\ is\ already\ in\ the\ requested\ gear\r\n
+comment2.params=
+comment2.target=java.lang.String\ getGear()
+comment2.text=\r\n\ Return\ the\ current\ gear\r\n
+numComments=3
