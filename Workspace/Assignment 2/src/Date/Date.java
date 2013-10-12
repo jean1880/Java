@@ -67,33 +67,11 @@ public class Date
 	{
 		try
 		{
-			// initialize variables for navigating monthNames
-			int i 			= 0;
-			boolean found 	= false;
-			
-			// begin to search for the requested month in the stored month array
-			while(!found && Date.monthNames[i] != null)
+			convertFromMonthName(monthName);
+			if((day > 0 && day <= Date.monthDays[month])&&(year >= MIN_YEAR && year <= CURRENT_YEAR))
 			{
-				// if monthName is in monthNames set found to true
-				if(Date.monthNames[i].toLowerCase().equals(monthName.toLowerCase()))
-				{
-					found = true;
-				}
-				
-				//increment the counter
-				i++;
-			}
-			
-			// if the monthName was found and day and year is valid set variables
-			if(found && (day > 0 && day <= Date.monthDays[month])&&(year >= MIN_YEAR && year <= CURRENT_YEAR))
-			{
-				this.month 	= i+1;
 				this.day	= day;
 				this.year	= year;
-			}
-			else // variable was not found, throw an error to the user
-			{
-				error("Specified Month not found");
 			}
 		}
 		catch(IllegalArgumentException e)
@@ -124,7 +102,7 @@ public class Date
 	{ 
 		try
 		{
-			if()
+			if(dd >= 0 && (dd <= Date.monthDays[month]))
 			{
 				
 			}
@@ -206,10 +184,9 @@ public class Date
    // given a month and day converts it into the day of the year
    // called from the method that returns the date in the format DDD YYYY
    
-   private int convertToDayOfYear()    
+   private boolean convertToDayOfYear()    
    {
-	 //write the code for this method replacing the return statement by the proper value
-	   return 0; //
+	 return false;
    } // end method convertToDayOfYear
 
    // convert from month name to month number
@@ -217,8 +194,50 @@ public class Date
    //set month to 1 if monthName is invalid
    private void convertFromMonthName( String monthName )   
    {
-     //write the code for this method
+	   // initialize variables for navigating monthNames
+	   int i 			= 0;
+	   boolean found 	= false;
+				
+	   // begin to search for the requested month in the stored month array
+	   while(!found && Date.monthNames[i] != null)
+	   {
+		   // if monthName is in monthNames set found to true
+		   if(Date.monthNames[i].toLowerCase().equals(monthName.toLowerCase()))
+		   {
+			   found = true;
+		   }
+					
+		   //increment the counter
+		   i++;
+	   }
+	   // if the monthName was found and day and year is valid set variables
+	   if(found)
+	   {
+		   	this.month 	= i+1;
+		}
+		else // variable was not found, set month to 1
+		{
+			this.month 	= 1;
+		}
    } // end convertFromMonthName
+   
+   private boolean verifymonthDay(int day)
+   {
+	   if(day >= 0 && (day <= Date.monthDays[month-1] || chackFebruaryDays(day)))
+		{
+			return true;
+		}
+	   return false;
+   }
+   
+   private boolean chackFebruaryDays(int day)
+   {
+	   if(leapYear() && day <= Date.monthDays[1])
+	   {
+		   return true;
+	   }
+	   return false;
+   }
 } // end class Date
 
 
