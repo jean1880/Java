@@ -48,7 +48,7 @@ public class Date
 			}
 			else // variable was found invalid, throw exception
 			{
-				error("Invalid Data provided");
+				throw new IllegalArgumentException("Invalid Data provided");
 			}
 		}
 		catch(IllegalArgumentException e)
@@ -91,7 +91,7 @@ public class Date
 		{
 			
 		}
-		catch()
+		catch(IllegalArgumentException e)
 		{
 			
 		}
@@ -122,7 +122,7 @@ public class Date
 		}
 		else // month is invalid 
 		{
-			error( "Month must be "+MIN_MONTH +"-" +MAX_MONTH );
+			throw new IllegalArgumentException( "Month must be "+MIN_MONTH +"-" +MAX_MONTH );
 		}
 	} // end method setMonth
 
@@ -135,16 +135,10 @@ public class Date
 		}
 		else // year is invalid 
 		{
-			error( "Year must be "+ MIN_YEAR+ "-" + MAX_YEAR);
+			throw new IllegalArgumentException( "Year must be "+ MIN_YEAR+ "-" + MAX_YEAR);
 		}
    } // end method setYear
 
-  
-	private void error(String errorMessage)
-	{
-		throw new IllegalArgumentException(errorMessage);
-	}
-  
    // Return the number of days in the month
    private int daysInMonth() 
    { 
@@ -171,8 +165,7 @@ public class Date
 
       setMonth( 1 );
 
-      for ( int m = 1; 
-         m < 13 && ( dayTotal + daysInMonth() ) < ddd; ++m )
+      for ( int m = 1;  m < 13 && ( dayTotal + daysInMonth() ) < ddd; ++m )
       {
          dayTotal += daysInMonth();
          setMonth( m + 1 );
