@@ -23,10 +23,10 @@ public class Date
     * Empty Constructor, initializes the date to January 1, 2013
     */
 	public Date()
-	{
-		this.day 	= 1;
-		this.month 	= 1;
-		this.year 	= 2013;
+	{		
+		setYear(CURRENT_YEAR);
+		setMonth(1);
+		setDay(1);
 	}
 	
 	/**
@@ -36,84 +36,66 @@ public class Date
 	 * @param year		Integer: Year in yyyy format, limited between 1900-2013
 	 */
 	public Date(int month, int day, int year)
-	{
-		try
-		{
-			// check month, day, and year for valid data, if valid, set variables
-			if((month >= MIN_MONTH && month <= MAX_MONTH)&&(day > 0 && day <= Date.monthDays[month])&&(year >= MIN_YEAR && year <= CURRENT_YEAR))
-			{
-				this.day 	= day;
-				this.month 	= month;
-				this.year 	= year;
-			}
-			else // variable was found invalid, throw exception
-			{
-				throw new IllegalArgumentException("Invalid Data provided");
-			}
-		}
-		catch(IllegalArgumentException e)
-		{
-			System.out.println("Invalid data type provided");
-		}
+	{		
+		// check month, day, and year for valid data, if valid, set variables		
+		setYear(year);		
+		setMonth(month);
+		setDay(day);
 	}
   
 	/**
-	 * 
+	 * Construct the date using the name of the month, the day and the year
 	 * @param monthName	String: Name of the month
-	 * @param day
-	 * @param year
+	 * @param day		Integer: Day of the month to set
+	 * @param year		Integer: Year to set
 	 */
 	public Date(String monthName, int day, int year) 
 	{
-		try
-		{
-			convertFromMonthName(monthName);
-			if((day > 0 && day <= Date.monthDays[month])&&(year >= MIN_YEAR && year <= CURRENT_YEAR))
-			{
-				this.day	= day;
-				this.year	= year;
-			}
-		}
-		catch(IllegalArgumentException e)
-		{
-			System.out.println(e.getMessage());
-		}
+		setYear(year);		
+		convertFromMonthName(monthName);
+		setDay(day);
 	}
 	
 	/**
-	 * 
-	 * @param dayOfYear
-	 * @param year
+	 * Construct the date using the day of the year and the year
+	 * @param dayOfYear		Integer: Day of the year
+	 * @param year			Integer: Year to be set
 	 */
 	public Date(int dayOfYear, int year)
 	{
-		try
-		{
-			
-		}
-		catch(IllegalArgumentException e)
-		{
-			
-		}
+
+		setYear(year);
+		convertFromDayOfYear(dayOfYear);
 	}
    
-	// Set the day; the value should be valid depending on the month; remember to check if it is a leap year   
+	/**
+	 * Set the day; 
+	 * @param dd		Integer: Day of the month to be set
+	 */
 	public void setDay( int dd )
 	{ 
 		try
 		{
-			if(dd >= 0 && (dd <= Date.monthDays[month]))
+			if(dd >= 0 && (dd <= Date.monthDays[month-1] || chackFebruaryDays(dd)))
 			{
-				
+				this.day = dd;
+			}
+			else
+			{
+				this.day = 1;
+				throw new IllegalArgumentException("Day is out of bounds for the specified month");
 			}
 		}
 		catch(IllegalArgumentException e)
 		{
-			
+			System.out.print(e.getMessage());
 		}
 	} // end method setDay
 
-	// Set the month
+	/**
+	 * Set the the month of the year
+	 * @param mm		Integer: Month of the year
+	 */
 	public void setMonth( int mm ) 
 	{ 
 		if ( mm >= MIN_MONTH && mm <= MAX_MONTH ) // validate month
@@ -122,11 +104,14 @@ public class Date
 		}
 		else // month is invalid 
 		{
-			throw new IllegalArgumentException( "Month must be "+MIN_MONTH +"-" +MAX_MONTH );
+			throw new IllegalArgumentException( "Month must be between "+MIN_MONTH +"-" +MAX_MONTH );
 		}
 	} // end method setMonth
 
-	// Set the year
+	/**
+	 * Set the year
+	 * @param yyyy		Integer: The year to set the date to
+	 */
 	public void setYear( int yyyy ) 
 	{ 
 		if ( yyyy >= MIN_YEAR && yyyy <= MAX_YEAR ) // validate year
@@ -135,37 +120,79 @@ public class Date
 		}
 		else // year is invalid 
 		{
-			throw new IllegalArgumentException( "Year must be "+ MIN_YEAR+ "-" + MAX_YEAR);
+			throw new IllegalArgumentException( "Year must be between "+ MIN_YEAR+ "-" + MAX_YEAR);
 		}
    } // end method setYear
+	
+	/**
+	 * Returns the date in the format of MM/DD/YYYY
+	 * @return String: Date
+	 */
+	public String getDateMMDDYYYY()
+	{
+		return String.format("%02d/%02d/%d", this.month, this.day, this.year);
+	}
+	
+	/**
+	 * Returns the date in the format of Name of the month dd, yyyy 
+	 * @return 	String: Date 
+	 */
+	public String getDateMonthNameDDYYYY()
+	{
+		return String.format("%s %02d, %d", monthNames[this.month - 1], this.day, this.year);
+	}
 
-   // Return the number of days in the month
-   private int daysInMonth() 
-   { 
-      return leapYear() && month == 2 ? 29 : monthDays[ month - 1 ];
-   } // end method daysOfMonth
-
-   // test for a leap year
+	/**
+	 * Return the date as ddd/yyyy
+	 * @return	String: Date
+	 */
+	public String getDateDayOfYearYYYY()
+	{
+		return String.format("%d/%d", convertToDayOfYear(), this.year);
+	}
+	
+	/**
+	 * Returns the number of the days in the month accounting for leapyears in february
+	 * @return Integer: Number of days
+	 */
+	private int daysInMonth() 
+	{ 	  
+		return leapYear() && this.month == 2 ? 29 : monthDays[ month - 1 ];
+	} // end method daysOfMonth
+   
+   /**
+    *  test for a leap year, fixed logic error
+    * @return Boolean: Leap year true or false
+    */
    private boolean leapYear() 
    {
-      if ( year % 400 == 0 || ( year % 4 == 0 && year % 100 != 0 ) )
-         return true;
+      if ( year % 4 == 0 && ( year % 400 == 0 || year % 100 != 0 ) )
+      {
+    	  return true;
+      }
       else
+      {
          return false;
+      }
    } // end method leapYear
 
-   // sets the day and month to the proper values based on day of the year
-   //called from the constructor that takes in the day of the year as one of its parameter
+   /**
+    *  sets the day and month to the proper values based on day of the year
+    *  called from the constructor that takes in the day of the year as one of its parameter
+    * @param ddd Integer: The day of the year
+    */
    private void convertFromDayOfYear( int ddd ) 
    {
       int dayTotal = 0;
-
+      
       if ( ddd < 1 || ddd > 366 ) // check for invalid day
+      {
          ddd = 1;
-
+      }
+      
       setMonth( 1 );
 
-      for ( int m = 1;  m < 13 && ( dayTotal + daysInMonth() ) < ddd; ++m )
+      for (int m = 1 ;  m < 13 && ( dayTotal + daysInMonth() ) < ddd; m++ )
       {
          dayTotal += daysInMonth();
          setMonth( m + 1 );
@@ -174,17 +201,40 @@ public class Date
       setDay( ddd - dayTotal );
    } // end convertFromDayOfYear
 
-   // given a month and day converts it into the day of the year
-   // called from the method that returns the date in the format DDD YYYY
-   
-   private boolean convertToDayOfYear()    
+   /**
+    *  given a month and day converts it into the day of the year
+    *  called from the method that returns the date in the format DDD YYYY   
+    * @return Integer: Day of the year
+    */
+   private int convertToDayOfYear()    
    {
-	 return false;
+	   int ddd;
+	   int i = 0;
+	   int sumDays = 1;
+	   
+	   // Add up the number of days except for the current month
+	   for(;i < month - 1; i++)
+	   {
+		   sumDays += Date.monthDays[i];
+	   }
+	   
+	   // if a leap year account for extended day in February
+	   if(leapYear() && i > 2)
+	   {
+		   sumDays++;
+	   }
+	   
+	   //passed number of days 
+	   ddd = sumDays + day;
+	   return ddd;
    } // end method convertToDayOfYear
 
-   // convert from month name to month number
-   // called from the constructor that takes in the name of the month as one of its parameter
-   //set month to 1 if monthName is invalid
+   /**
+    *  convert from month name to month number
+    *  called from the constructor that takes in the name of the month as one of its parameter
+    *  set month to 1 if monthName is invalid
+    * @param monthName
+    */
    private void convertFromMonthName( String monthName )   
    {
 	   // initialize variables for navigating monthNames
@@ -206,7 +256,7 @@ public class Date
 	   // if the monthName was found and day and year is valid set variables
 	   if(found)
 	   {
-		   	this.month 	= i+1;
+		   	this.month 	= i;
 		}
 		else // variable was not found, set month to 1
 		{
@@ -214,18 +264,14 @@ public class Date
 		}
    } // end convertFromMonthName
    
-   private boolean verifymonthDay(int day)
-   {
-	   if(day >= 0 && (day <= Date.monthDays[month-1] || chackFebruaryDays(day)))
-		{
-			return true;
-		}
-	   return false;
-   }
-   
+   /**
+    * Check Febraury specifically for number of days it contains, to see iof days being passed to it is a valid number of days
+    * @param day 	Integer: Days to check
+    * @return		Boolean: Days are valid true or false
+    */
    private boolean chackFebruaryDays(int day)
    {
-	   if(leapYear() && day <= Date.monthDays[1])
+	   if(leapYear() && day <= Date.monthDays[1] + 1)
 	   {
 		   return true;
 	   }
